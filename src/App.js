@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import CurrentlyReading from './CurrentlyReading'
+import WantToRead from './WantToRead'
+import Read from './Read'
 import './App.css';
 
 class App extends Component {
@@ -10,7 +11,11 @@ class App extends Component {
         <div className="list-books-title">
           <h1>Welcome to My Reads App</h1>
         </div>
-        <CurrentlyReading/>
+        <div className="list-books-content">
+          <CurrentlyReading/>
+          <WantToRead/>
+          <Read/>
+        </div>
       </div>
     );
   }
