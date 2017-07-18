@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import CurrentlyReading from './CurrentlyReading'
 import WantToRead from './WantToRead'
 import Read from './Read'
+import * as BooksAPI from './utils/BooksAPI'
 import './App.css';
 
 class App extends Component {
