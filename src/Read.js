@@ -7,7 +7,7 @@ class Read extends Component {
       <div className="bookshelf">
         <h2 className="bookshelf-title">Read</h2>
         <div className="bookshelf-books">
-          <BookGrid/>
+          {/* <BookGrid/> */}
         </div>
       </div>
     )
