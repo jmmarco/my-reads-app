@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import CurrentlyReading from './CurrentlyReading'
-import WantToRead from './WantToRead'
-import Read from './Read'
+import Search from './Search'
 import * as BooksAPI from './utils/BooksAPI'
 import './App.css';
 
@@ -11,16 +10,14 @@ class App extends Component {
     books: []
   }
 
-
-  // Add lifecycle event
   componentDidMount() {
     BooksAPI.getAll().then((books) => {
       this.setState({ books })
-      // console.log(books)
     })
   }
 
   render() {
+
     return (
       <div className="app">
         <div className="list-books-title">
@@ -28,11 +25,14 @@ class App extends Component {
         </div>
         <div className="list-books-content">
           <CurrentlyReading books={this.state.books} />
-          {/* <WantToRead/>
-          <Read/> */}
+          {/* <WantToRead/> */}
+          {/* <Read/> */}
+        </div>
+        <div className="open-search">
+          <Search/>
         </div>
       </div>
-    );
+    )
   }
 }
 
