@@ -4,12 +4,8 @@ class BookGrid extends Component {
 
 
   render() {
-    const books = this.props.books
+    console.log(this.props)
 
-    // let books = this.props
-    console.log("Props", books);
-
-    console.log("props from BookGrid: ", this.props)
     return (
       // <ul className="books-grid">
       //   {books.map((book) => (
