@@ -21,7 +21,6 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state)
     return (
       <div className="app">
         <div className="list-books-title">
@@ -29,8 +28,8 @@ class App extends Component {
         </div>
         <div className="list-books-content">
           <CurrentlyReading books={this.state.books} />
-          <WantToRead/>
-          <Read/>
+          {/* <WantToRead/>
+          <Read/> */}
         </div>
       </div>
     );

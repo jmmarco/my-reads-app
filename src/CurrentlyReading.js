@@ -12,7 +12,7 @@ class CurrentlyReading extends Component {
       <div className="bookshelf">
         <h2 className="bookshelf-title">Currently Reading</h2>
         <div className="bookshelf-books">
-          <BookGrid books={books}/>
+          <BookGrid books={this.props.books}/>
         </div>
       </div>
     )
