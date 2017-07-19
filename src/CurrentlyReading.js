@@ -5,20 +5,14 @@ import BookGrid from './BookGrid'
 
 class CurrentlyReading extends Component {
 
-  static propTypes = {
-    books: PropTypes.array.isRequired,
-  }
-
   render() {
-    const { books } = this.props
-    let showingBooks
-    console.log(books)
-
+    // console.log(this.props)
+    const books = this.props.books
     return (
       <div className="bookshelf">
         <h2 className="bookshelf-title">Currently Reading</h2>
         <div className="bookshelf-books">
-          <BookGrid/>
+          <BookGrid books={books}/>
         </div>
       </div>
     )
