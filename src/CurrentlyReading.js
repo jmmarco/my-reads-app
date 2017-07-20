@@ -1,23 +1,17 @@
 import React, { Component } from 'react'
-import Book from './Book'
-import PropTypes from 'prop-types'
+import BookShelf from './BookShelf'
 
 class CurrentlyReading extends Component {
-
   render() {
-
-    console.log('Props', this.props);
+    const {books} = this.props
     return (
       <div className="bookshelf">
         <h2 className="bookshelf-title">Currently Reading</h2>
-        <Book/>
+        <BookShelf books={books}/>
       </div>
     )
   }
 }
 
-CurrentlyReading.propTypes = {
-  books: PropTypes.array.isRequired
-}
 
 export default CurrentlyReading

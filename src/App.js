@@ -13,7 +13,7 @@ class App extends Component {
 
   state = {
     books: [],
-    showSearchPage: true
+    showSearchPage: false
   }
 
   componentDidMount() {
@@ -56,9 +56,9 @@ class App extends Component {
             </div>
 
             <div className="list-books-content">
-              <CurrentlyReading/>
-              <Read/>
-              <WantToRead/>
+              <CurrentlyReading books={this.state.books}/>
+              <Read books={this.state.books}/>
+              <WantToRead books={this.state.books}/>
             </div>
 
 
