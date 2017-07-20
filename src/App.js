@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import CurrentlyReading from './CurrentlyReading'
 import Read from './Read'
 import WantToRead from './WantToRead'
+import BookShelf from './BookShelf'
 import * as BooksAPI from './utils/BooksAPI'
-import './App.css';
+import './App.css'
 
 class App extends Component {
 
@@ -13,14 +14,30 @@ class App extends Component {
 
   state = {
     books: [],
-    showSearchPage: false
+    showSearchPage: false,
+    query: '',
+    maxResults: 10
   }
+
+
 
   componentDidMount() {
     BooksAPI.getAll().then((books) => {
       this.setState({ books })
     })
   }
+
+  updateQuery = (query) => {
+    this.setState({ query: query.trim() })
+
+    BooksAPI.search(this.state.query, this.state.maxResults).then((books) => {
+      this.setState({books})
+    })
+
+    console.log(this.state.books)
+  }
+
+
 
   render() {
     return (
@@ -31,6 +48,7 @@ class App extends Component {
             <div className="search-books-bar">
               <a className="close-search" onClick={() => this.setState({ showSearchPage: false })}>Close</a>
               <div className="search-books-input-wrapper">
+
                 {/*
                   NOTES: The search from BooksAPI is limited to a particular set of search terms.
                   You can find these search terms here:
@@ -39,12 +57,16 @@ class App extends Component {
                   However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
                   you don't find a specific author or title. Every search is limited by search terms.
                 */}
-                <input type="text" placeholder="Search by title or author"/>
+                <input type="text"
+                  placeholder="Search by title or author"
+                  value={this.state.query}
+                  onChange={(event) => this.updateQuery(event.target.value)}
+                />
 
               </div>
             </div>
             <div className="search-books-results">
-              <ol className="books-grid"></ol>
+              {/* <BookShelf books={this.state.books}/> */}
             </div>
           </div>
         ) : (
