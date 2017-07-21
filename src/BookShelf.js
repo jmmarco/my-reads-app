@@ -5,7 +5,7 @@ class BookShelf extends Component {
 
   render() {
     const {books} = this.props;
-    console.log('Props: ', this.props)
+    // console.log('Props: ', this.props)
 
     // This is much cleaner approach
     const mappedBooks = books.map((book, i) => {

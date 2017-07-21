@@ -30,9 +30,6 @@ class App extends Component {
 
     BooksAPI.search(this.state.query, this.state.maxResults)
     .then((books) => {
-      console.log(books)
-      console.log(query.trim())
-      console.log(typeof books)
       if (typeof books === 'undefined' || books.error) return
       this.setState({books})
     })
@@ -84,7 +81,7 @@ class App extends Component {
             </div>
 
 
-
+            
           </div>
 
 
