@@ -19,8 +19,6 @@ class App extends Component {
     maxResults: 10
   }
 
-
-
   componentDidMount() {
     BooksAPI.getAll().then((books) => {
       this.setState({ books })
@@ -30,14 +28,16 @@ class App extends Component {
   updateQuery = (query) => {
     this.setState({ query: query.trim() })
 
-    BooksAPI.search(this.state.query, this.state.maxResults).then((books) => {
+    BooksAPI.search(this.state.query, this.state.maxResults)
+    .then((books) => {
+      console.log(books)
+      console.log(query.trim())
+      console.log(typeof books)
+      if (typeof books === 'undefined' || books.error) return
       this.setState({books})
     })
-
-    console.log(this.state.books)
+    .catch(err => console.log('There was an API error', err))
   }
-
-
 
   render() {
     return (
@@ -66,7 +66,7 @@ class App extends Component {
               </div>
             </div>
             <div className="search-books-results">
-              {/* <BookShelf books={this.state.books}/> */}
+              <BookShelf books={this.state.books}/>
             </div>
           </div>
         ) : (
@@ -78,9 +78,9 @@ class App extends Component {
             </div>
 
             <div className="list-books-content">
-              <CurrentlyReading books={this.state.books}/>
-              <Read books={this.state.books}/>
-              <WantToRead books={this.state.books}/>
+              <CurrentlyReading books={this.state.books.filter(book => book.shelf === 'currentlyReading' )}/>
+              <Read books={this.state.books.filter(book => book.shelf === 'read')}/>
+              <WantToRead books={this.state.books.filter(book => book.shelf === 'wantToRead' )}/>
             </div>
 
 
