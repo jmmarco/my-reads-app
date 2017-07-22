@@ -1,7 +1,4 @@
 import React, { Component } from 'react'
-import CurrentlyReading from './CurrentlyReading'
-import Read from './Read'
-import WantToRead from './WantToRead'
 import BookShelf from './BookShelf'
 import * as BooksAPI from './utils/BooksAPI'
 import './App.css'
@@ -75,13 +72,11 @@ class App extends Component {
             </div>
 
             <div className="list-books-content">
-              <CurrentlyReading books={this.state.books.filter(book => book.shelf === 'currentlyReading' )}/>
-              <Read books={this.state.books.filter(book => book.shelf === 'read')}/>
-              <WantToRead books={this.state.books.filter(book => book.shelf === 'wantToRead' )}/>
+              <BookShelf title={"Currently Reading"} books={this.state.books.filter(book => book.shelf === 'currentlyReading' )}/>
+              <BookShelf title={"Read"} books={this.state.books.filter(book => book.shelf === 'read')}/>
+              <BookShelf title={"Want to Read"} books={this.state.books.filter(book => book.shelf === 'wantToRead' )}/>
             </div>
 
-
-            
           </div>
 
 

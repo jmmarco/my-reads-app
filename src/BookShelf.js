@@ -13,11 +13,13 @@ class BookShelf extends Component {
     })
 
     return (
-
-      <div className="bookshelf-books">
-        <ol className="books-grid">
-          {mappedBooks}
-        </ol>
+      <div className="bookshelf">
+        <h2 className="bookshelf-title">{this.props.title}</h2>
+        <div className="bookshelf-books">
+          <ol className="books-grid">
+            {mappedBooks}
+          </ol>
+        </div>
       </div>
 
     )
