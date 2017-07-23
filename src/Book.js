@@ -6,8 +6,8 @@ class Book extends Component {
   state = {
     book : null,
     bookId: null,
-    shelf: null,
-    value: 'none'
+    shelf: '',
+    value: ''
 
   }
 
@@ -27,13 +27,13 @@ class Book extends Component {
 
   updateBook = (book, shelf) => {
 
-    console.log(book, shelf)
 
     BooksAPI.update(book, shelf)
     .then((book, shelf) => {
       this.setState({
-        book, shelf
+        book, shelf: shelf, value: this.state.value
       })
+      console.log(this.state)
     })
     .catch(err => console.log('Something went wrong', err))
   }
