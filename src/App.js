@@ -22,6 +22,15 @@ class App extends Component {
     })
   }
 
+  getBook = (bookId) => {
+
+    BooksAPI.get(bookId)
+    .then((book) => {
+      // do something
+    })
+    .catch(err => console.log('Something went wrong', err))
+  }
+
   updateQuery = (query) => {
     this.setState({ query: query.trim() })
 
