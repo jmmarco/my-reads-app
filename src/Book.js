@@ -7,7 +7,7 @@ class Book extends Component {
     book : null,
     bookId: null,
     shelf: '',
-    value: ''
+    value: 'none'
 
   }
 
@@ -16,7 +16,10 @@ class Book extends Component {
     BooksAPI.get(bookId)
     .then((book) => {
       // do something
-      this.setState({book})
+      this.setState({
+        book
+      })
+
       console.log("State was set")
       console.log(this.state)
     })
@@ -25,13 +28,15 @@ class Book extends Component {
   }
 
 
-  updateBook = (book, shelf) => {
+  updateBook = (event) => {
 
+    console.log(event)
 
-    BooksAPI.update(book, shelf)
+    BooksAPI.update(this.state.book, this.state.shelf)
+    console.log(this.state.book, this.state.shelf)
     .then((book, shelf) => {
       this.setState({
-        book, shelf: shelf, value: this.state.value
+        value: event.target.value
       })
       console.log(this.state)
     })
@@ -49,7 +54,7 @@ class Book extends Component {
               <div className="book-top">
                 <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks && book.imageLinks.thumbnail })` }}></div>
                 <div className="book-shelf-changer">
-                  <select value={this.state.value} onChange={(event) => this.updateBook(book ,event.target.value)}>
+                  <select value={this.state.value} onChange={(event) => this.updateBook}>
                     <option value="none" disabled>Move to...</option>
                     <option value="currentlyReading">Currently Reading</option>
                     <option value="wantToRead">Want to Read</option>
