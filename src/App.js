@@ -10,14 +10,25 @@ class App extends Component {
     books: [],
     showSearchPage: false,
     query: '',
-    maxResults: 10
+    maxResults: 10,
+    updateBook: 'Pizzaaaa'
   }
 
   componentDidMount() {
-
     BooksAPI.getAll().then((books) => {
       console.log('what are you: ', books)
       this.setState({ books })
+    })
+  }
+
+  updateBook = (event) => {
+    console.log("fired")
+    BooksAPI.update(this.state.book, event.target.value).then((book) => {
+      this.setState((state) => ({
+        book: state.book,
+        shelf: state.book.shelf,
+        value: state.book.shelf
+      }))
     })
   }
 
