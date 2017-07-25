@@ -2,12 +2,9 @@ import React, { Component } from 'react'
 import BookShelf from './BookShelf'
 import * as BooksAPI from './utils/BooksAPI'
 import './App.css'
+import PropTypes from 'prop-types'
 
 class App extends Component {
-
-  propTypes: {
-    books: React.PropTypes.array.isRequired
-  }
 
   state = {
     books: [],
@@ -17,18 +14,11 @@ class App extends Component {
   }
 
   componentDidMount() {
+
     BooksAPI.getAll().then((books) => {
+      console.log('what are you: ', books)
       this.setState({ books })
     })
-  }
-
-  getBook = (bookId) => {
-
-    BooksAPI.get(bookId)
-    .then((book) => {
-      // do something
-    })
-    .catch(err => console.log('Something went wrong', err))
   }
 
   updateQuery = (query) => {
@@ -97,6 +87,11 @@ class App extends Component {
       </div>
     )
   }
+}
+
+// Moving propTypes outside per: https://facebook.github.io/react/docs/typechecking-with-proptypes.html
+App.propTypes = {
+  books: PropTypes.array
 }
 
 export default App;
