@@ -6,13 +6,17 @@ import PropTypes from 'prop-types'
 
 class App extends Component {
 
-  state = {
-    books: [],
-    showSearchPage: false,
-    query: '',
-    maxResults: 10,
-    updateBook: 'Pizzaaaa'
+  constructor(props) {
+    super(props);
+    this.state = {
+      books: [],
+      showSearchPage: false,
+      query: '',
+      maxResults: 10,
+    }
+    this.updateBook = this.updateBook.bind(this)
   }
+
 
   componentDidMount() {
     BooksAPI.getAll().then((books) => {
@@ -82,9 +86,21 @@ class App extends Component {
             </div>
 
             <div className="list-books-content">
-              <BookShelf title={"Currently Reading"} books={this.state.books.filter(book => book.shelf === 'currentlyReading' )}/>
-              <BookShelf title={"Read"} books={this.state.books.filter(book => book.shelf === 'read')}/>
-              <BookShelf title={"Want to Read"} books={this.state.books.filter(book => book.shelf === 'wantToRead' )}/>
+              <BookShelf
+                title={"Currently Reading"}
+                books={this.state.books.filter(book => book.shelf === 'currentlyReading')}
+                onChange={this.updateBook}
+              />
+              <BookShelf
+                title={"Read"}
+                books={this.state.books.filter(book => book.shelf === 'read')}
+                onChange={this.updateBook}
+              />
+              <BookShelf
+                title={"Want to Read"}
+                books={this.state.books.filter(book => book.shelf === 'wantToRead' )}
+                onChange={this.updateBook}
+              />
             </div>
 
           </div>

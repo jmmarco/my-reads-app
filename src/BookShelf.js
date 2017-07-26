@@ -5,11 +5,11 @@ class BookShelf extends Component {
 
   render() {
     const {books} = this.props;
-    // console.log('Props: ', this.props)
+    console.log('Props: ', this.props)
 
     // This is much cleaner approach
     const mappedBooks = books.map((book, i) => {
-      return <Book book={book} key={i}/>
+      return <Book book={book} key={i} onChange={this.updateBook} />
     })
 
     return (
