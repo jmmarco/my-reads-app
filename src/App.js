@@ -26,19 +26,18 @@ class App extends Component {
   }
 
   updateBook = (book, value) => {
-    console.log("fired")
+    console.log('fired')
+
     BooksAPI.update(book, value).then((book) => {
 
-
-      const books = this.state.books.filter((b, i) => {
-         if(b.shelf !== value) {
-           return b
-         }
+      const books = this.state.books.map((b) => {
+        if(book.id === b.id ) {
+          b.shelf = value
+        }
+        return b
       })
 
-      console.log(books)
-
-      this.setState({books});
+      this.setState({books})
     })
   }
 
