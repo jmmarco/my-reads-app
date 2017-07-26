@@ -25,14 +25,20 @@ class App extends Component {
     })
   }
 
-  updateBook = (event) => {
+  updateBook = (book, value) => {
     console.log("fired")
-    BooksAPI.update(this.state.book, event.target.value).then((book) => {
-      this.setState((state) => ({
-        book: state.book,
-        shelf: state.book.shelf,
-        value: state.book.shelf
-      }))
+    BooksAPI.update(book, value).then((book) => {
+
+      const books = this.state.books.map(b => {
+        // update book shelf if needed here
+        console.log(b.shelf, value)
+        if (b.shelf !== value)
+          return b;
+      });
+
+      console.log(books)
+
+      this.setState({books});
     })
   }
 
@@ -89,17 +95,17 @@ class App extends Component {
               <BookShelf
                 title={"Currently Reading"}
                 books={this.state.books.filter(book => book.shelf === 'currentlyReading')}
-                onChange={this.updateBook}
+                updateBook={this.updateBook}
               />
               <BookShelf
                 title={"Read"}
                 books={this.state.books.filter(book => book.shelf === 'read')}
-                onChange={this.updateBook}
+                updateBook={this.updateBook}
               />
               <BookShelf
                 title={"Want to Read"}
                 books={this.state.books.filter(book => book.shelf === 'wantToRead' )}
-                onChange={this.updateBook}
+                updateBook={this.updateBook}
               />
             </div>
 

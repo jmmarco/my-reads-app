@@ -9,7 +9,7 @@ class BookShelf extends Component {
 
     // This is much cleaner approach
     const mappedBooks = books.map((book, i) => {
-      return <Book book={book} key={i} onChange={this.updateBook} />
+      return <Book book={book} key={i} updateBook={this.props.updateBook} />
     })
 
     return (
