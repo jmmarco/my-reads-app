@@ -36,7 +36,6 @@ class App extends Component {
          }
       })
 
-
       console.log(books)
 
       this.setState({books});
