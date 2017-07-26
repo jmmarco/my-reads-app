@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
-import * as BooksAPI from './utils/BooksAPI'
 
 class Book extends Component {
 
 
   render() {
-    console.log(this.props)
+    // console.log(this.props)
     const {book, updateBook} = this.props
     return (
       <li key={book.id}>

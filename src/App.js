@@ -29,12 +29,22 @@ class App extends Component {
     console.log("fired")
     BooksAPI.update(book, value).then((book) => {
 
-      const books = this.state.books.map(b => {
-        // update book shelf if needed here
-        console.log(b.shelf, value)
-        if (b.shelf !== value)
-          return b;
-      });
+      // const mappedBooks = books.map((book, i) => {
+      //   return <Book book={book} key={i} updateBook={this.props.updateBook} />
+      // })
+
+      const books = this.state.books.map((b, i) => {
+         if(b.shelf !== value) {
+           return b
+         }
+      })
+
+      // const books = this.state.books.map(b => {
+      //   // update book shelf if needed here
+      //   console.log(b.shelf, value)
+      //   if (b.shelf !== value)
+      //     return b;
+      // });
 
       console.log(books)
 
