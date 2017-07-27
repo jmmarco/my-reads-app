@@ -27,8 +27,7 @@ class App extends Component {
 
   updateBook = (book, value) => {
     console.log('fired')
-
-    BooksAPI.update(book, value).then((book) => {
+    BooksAPI.update(book, value).then((response) => {
 
       const books = this.state.books.map((b) => {
         if(book.id === b.id ) {
@@ -36,9 +35,9 @@ class App extends Component {
         }
         return b
       })
-
       this.setState({books})
     })
+
   }
 
   updateQuery = (query) => {
