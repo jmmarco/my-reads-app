@@ -78,7 +78,7 @@ class App extends Component {
               </div>
             </div>
             <div className="search-books-results">
-              <BookShelf books={this.state.books}/>
+              <BookShelf books={this.state.books} updateBook={this.updateBook}/>
             </div>
           </div>
         ) : (
