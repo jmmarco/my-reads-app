@@ -15,7 +15,6 @@ class App extends Component {
       showSearchPage: false,
       query: '',
       maxResults: 10,
-      searchedBooks: []
     }
     this.updateBook = this.updateBook.bind(this)
   }
@@ -28,12 +27,14 @@ class App extends Component {
     })
   }
 
+
+
   updateBook = (book, value) => {
     console.log('fired')
     BooksAPI.update(book, value).then((response) => {
 
       const books = this.state.books.map((b) => {
-        if(book.id === b.id ) {
+        if( book.id === b.id ) {
           b.shelf = value
         }
         return b
@@ -50,13 +51,15 @@ class App extends Component {
       BooksAPI.search(query, this.state.maxResults)
       .then((response) => {
         if (typeof response === 'undefined' || response.error) return
-        this.setState({searchedBooks: response})
+        this.setState({books: response})
       })
       .catch(err => console.log('There was an API error', err))
     } else {
       // Clear the books array since no search terms were entered
-      this.setState({searchedBooks:[]})
+      this.setState({books:[]})
     }
+
+
 
 
   }
@@ -102,7 +105,7 @@ class App extends Component {
               </div>
             </div>
             <div className="search-books-results">
-              <BookShelf books={this.state.searchedBooks} updateBook={this.updateBook}/>
+              <BookShelf books={this.state.books} updateBook={this.updateBook}/>
             </div>
           </div>
         ) : (
@@ -144,7 +147,7 @@ class App extends Component {
 
         )}
         <div className="open-search">
-          <Link to="/search" onClick={() => this.setState({ showSearchPage: true})}>Search book</Link>
+          <Link to="/search" onClick={() => this.setState({ showSearchPage: true, books:[]})}>Search book</Link>
           </div>
       </div>
     )
