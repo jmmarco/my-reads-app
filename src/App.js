@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
+import { Route } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
 import BookShelf from './BookShelf'
 import * as BooksAPI from './utils/BooksAPI'
 import './App.css'
-import PropTypes from 'prop-types'
 
 class App extends Component {
 
@@ -13,6 +15,7 @@ class App extends Component {
       showSearchPage: false,
       query: '',
       maxResults: 10,
+      searchedBooks: []
     }
     this.updateBook = this.updateBook.bind(this)
   }
@@ -43,22 +46,43 @@ class App extends Component {
   updateQuery = (query) => {
     this.setState({ query: query.trim() })
 
-    BooksAPI.search(this.state.query, this.state.maxResults)
-    .then((books) => {
-      if (typeof books === 'undefined' || books.error) return
-      this.setState({books})
-    })
-    .catch(err => console.log('There was an API error', err))
+    if (query.trim() !== '') {
+      BooksAPI.search(query, this.state.maxResults)
+      .then((response) => {
+        if (typeof response === 'undefined' || response.error) return
+        this.setState({searchedBooks: response})
+      })
+      .catch(err => console.log('There was an API error', err))
+    } else {
+      // Clear the books array since no search terms were entered
+      this.setState({searchedBooks:[]})
+    }
+
+
   }
 
+
+  // updateQuery = query => {
+  //   this.setState({ query: query.trim() })
+  //
+  //   if (query.trim() !== '') {
+  //     BooksAPI.search(this.state.query, 5).then( searchResult => (
+  //       this.setState({books: searchResult})
+  //     ))
+  //   }
+  //   console.log(this.state.searchResult)
+  // }
+
   render() {
+
+
     return (
 
       <div className="app">
         {this.state.showSearchPage ? (
           <div className="search-books">
             <div className="search-books-bar">
-              <a className="close-search" onClick={() => this.setState({ showSearchPage: false })}>Close</a>
+              <Link to="/" className="close-search" onClick={() => this.setState({ showSearchPage: false, books: this.state.books }, console.log("hi this.state.books is: ", this.state.books))}>Close</Link>
               <div className="search-books-input-wrapper">
 
                 {/*
@@ -78,7 +102,7 @@ class App extends Component {
               </div>
             </div>
             <div className="search-books-results">
-              <BookShelf books={this.state.books} updateBook={this.updateBook}/>
+              <BookShelf books={this.state.searchedBooks} updateBook={this.updateBook}/>
             </div>
           </div>
         ) : (
@@ -89,23 +113,30 @@ class App extends Component {
               <h1>MyReads</h1>
             </div>
 
-            <div className="list-books-content">
-              <BookShelf
-                title={"Currently Reading"}
-                books={this.state.books.filter(book => book.shelf === 'currentlyReading')}
-                updateBook={this.updateBook}
-              />
-              <BookShelf
-                title={"Read"}
-                books={this.state.books.filter(book => book.shelf === 'read')}
-                updateBook={this.updateBook}
-              />
-              <BookShelf
-                title={"Want to Read"}
-                books={this.state.books.filter(book => book.shelf === 'wantToRead' )}
-                updateBook={this.updateBook}
-              />
-            </div>
+
+            <Route path="/" exact
+              render={() => (
+                <div className="list-books-content">
+                  <BookShelf
+                    title={"Currently Reading"}
+                    books={this.state.books.filter(book => book.shelf === 'currentlyReading')}
+                    updateBook={this.updateBook}
+                  />
+                  <BookShelf
+                    title={"Read"}
+                    books={this.state.books.filter(book => book.shelf === 'read')}
+                    updateBook={this.updateBook}
+                  />
+                  <BookShelf
+                    title={"Want to Read"}
+                    books={this.state.books.filter(book => book.shelf === 'wantToRead' )}
+                    updateBook={this.updateBook}
+                  />
+                </div>
+              )}>
+            </Route>
+
+
 
           </div>
 
@@ -113,8 +144,8 @@ class App extends Component {
 
         )}
         <div className="open-search">
-          <a onClick={() => this.setState({ showSearchPage: true })}>Add a book</a>
-        </div>
+          <Link to="/search" onClick={() => this.setState({ showSearchPage: true})}>Search book</Link>
+          </div>
       </div>
     )
   }
