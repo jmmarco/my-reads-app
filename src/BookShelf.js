@@ -4,7 +4,9 @@ import Book from './Book'
 class BookShelf extends Component {
 
   render() {
-    const {books} = this.props;
+    console.log('fired')
+    console.log(this.props.searchResults)
+    const {books} = this.props
     // console.log('Props: ', this.props)
 
     // This is much cleaner approach

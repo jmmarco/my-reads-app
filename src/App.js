@@ -14,6 +14,7 @@ class App extends Component {
       showSearchPage: false,
       query: '',
       maxResults: 10,
+      searchResults: []
     }
     this.updateBook = this.updateBook.bind(this)
     this.closeSearch = this.closeSearch.bind(this)
@@ -66,7 +67,7 @@ class App extends Component {
 
       <div className="app">
         {this.state.showSearchPage ? (
-          <Search books={this.state.books} query={this.state.query} updateBook={this.updateBook} updateQuery={this.updateQuery} closeSearch={this.closeSearch}/>
+          <Search books={this.state.searchResults} query={this.state.query} updateBook={this.updateBook} updateQuery={this.updateQuery} closeSearch={this.closeSearch}/>
         ) : (
 
           <div className="list-books">
