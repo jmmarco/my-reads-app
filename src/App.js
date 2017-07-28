@@ -29,17 +29,36 @@ class App extends Component {
     })
   }
 
-  updateBook = (book, value) => {
+  updateBook = (book, newShelf) => {
     console.log('fired')
-    BooksAPI.update(book, value).then((response) => {
+    BooksAPI.update(book, newShelf).then((response) => {
 
-      const books = this.state.books.map((b) => {
+      //  Map the books array
+      let books = this.state.books.map((b) => {
         if(book.id === b.id ) {
-          b.shelf = value
+          b.shelf = newShelf
         }
         return b
       })
-      this.setState({books})
+
+      // Map the Search results books array
+      let searchedBooks = this.state.searchResults.map((b) => {
+        if (book.id === b.id) {
+          b.shelf = newShelf
+        }
+        return b
+      })
+
+      // Concat both arrays
+      let results = books.concat(searchedBooks)
+
+      // Filter out duplicates
+      results = results.filter((b, pos, self) => {
+        return self.indexOf(b) === pos
+      })
+
+      // Set the state
+      this.setState({books: results})
     })
 
   }

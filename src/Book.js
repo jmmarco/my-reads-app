@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 
 class Book extends Component {
 
-  updateBook = (book, value) => {
-    this.props.updateBook(book, value)
+  updateBook = (book, newShelf) => {
+    console.log('fired updateBook')
+    this.props.updateBook(book, newShelf)
   }
 
 

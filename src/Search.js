@@ -41,7 +41,7 @@ class Search extends Component {
           </div>
         </div>
         <div className="search-books-results">
-          <BookShelf books={this.props.books} updateBook={this.updateBook}/>
+          <BookShelf books={this.props.books} updateBook={this.props.updateBook}/>
         </div>
       </div>
     )

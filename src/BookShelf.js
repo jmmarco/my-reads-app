@@ -6,7 +6,7 @@ class BookShelf extends Component {
   render() {
     console.log('fired')
     console.log(this.props.searchResults)
-    const {books} = this.props
+    const {books, updateBook} = this.props
     // console.log('Props: ', this.props)
 
     // This is much cleaner approach
