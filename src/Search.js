@@ -9,11 +9,8 @@ class Search extends Component {
   }
 
   closeSearch(e) {
-    console.log("Closing Search")
-    console.log("Event is", e)
     this.props.closeSearch()
   }
-
 
   render() {
     const {updateQuery} = this.props
@@ -23,7 +20,6 @@ class Search extends Component {
         <div className="search-books-bar">
           <a className="close-search" onClick={(e) => this.closeSearch(e)}>Close</a>
           <div className="search-books-input-wrapper">
-
             {/*
               NOTES: The search from BooksAPI is limited to a particular set of search terms.
               You can find these search terms here:
@@ -37,7 +33,6 @@ class Search extends Component {
               value={this.props.query}
               onChange={(event) => this.searchStuff(event.target.value)}
             />
-
           </div>
         </div>
         <div className="search-books-results">

@@ -4,10 +4,7 @@ import Book from './Book'
 class BookShelf extends Component {
 
   render() {
-    console.log('fired')
-    console.log(this.props.searchResults)
     const {books, updateBook} = this.props
-    // console.log('Props: ', this.props)
 
     // This is much cleaner approach
     const mappedBooks = books.map((book, i) => {
@@ -23,10 +20,8 @@ class BookShelf extends Component {
           </ol>
         </div>
       </div>
-
     )
   }
-
 }
 
 export default BookShelf

@@ -7,7 +7,6 @@ class Book extends Component {
     this.props.updateBook(book, newShelf)
   }
 
-
   render() {
     console.log(this.props)
     const {book, updateBook} = this.props
@@ -33,6 +32,5 @@ class Book extends Component {
     )
   }
 }
-
 
 export default Book

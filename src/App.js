@@ -21,16 +21,13 @@ class App extends Component {
     this.updateQuery = this.updateQuery.bind(this)
   }
 
-
   componentDidMount() {
     BooksAPI.getAll().then((books) => {
-      console.log('what are you: ', books)
       this.setState({ books })
     })
   }
 
   updateBook = (book, newShelf) => {
-    console.log('fired')
     BooksAPI.update(book, newShelf).then((response) => {
 
       //  Map the books array
@@ -63,12 +60,10 @@ class App extends Component {
 
   }
 
-
   closeSearch = (e) => {
     console.log('fired!')
     this.setState({ showSearchPage: false })
   }
-
 
   updateQuery = (query) => {
     this.setState({ query: query.trim() })
@@ -85,7 +80,6 @@ class App extends Component {
 
   render() {
     return (
-
       <div className="app">
         {this.state.showSearchPage ? (
           <Search books={this.state.searchResults} query={this.state.query} updateBook={this.updateBook} updateQuery={this.updateQuery} closeSearch={this.closeSearch}/>
@@ -114,11 +108,7 @@ class App extends Component {
                 updateBook={this.updateBook}
               />
             </div>
-
           </div>
-
-
-
         )}
         <div className="open-search">
           <a onClick={() => this.setState({ showSearchPage: true })}>Add a book</a>
