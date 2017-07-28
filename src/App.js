@@ -57,7 +57,9 @@ class App extends Component {
     BooksAPI.search(this.state.query, this.state.maxResults)
     .then((books) => {
       if (typeof books === 'undefined' || books.error) return
-      this.setState({books})
+      this.setState({
+        searchResults: books
+      })
     })
     .catch(err => console.log('There was an API error', err))
   }
