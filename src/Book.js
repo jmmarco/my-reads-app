@@ -2,9 +2,13 @@ import React, { Component } from 'react'
 
 class Book extends Component {
 
+  updateBook = (book, value) => {
+    this.props.updateBook(book, value)
+  }
+
 
   render() {
-    // console.log(this.props)
+    console.log(this.props)
     const {book, updateBook} = this.props
     return (
       <li key={book.id}>
