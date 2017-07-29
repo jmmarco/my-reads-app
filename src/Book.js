@@ -26,7 +26,7 @@ class Book extends Component {
             </div>
           </div>
           <div className="book-title">{book.title}</div>
-          <div className="book-authors">{book.authors}</div>
+          <div className="book-authors">{book.authors !== undefined && book.authors.length > 1 ? book.authors.map((a) => `${a} `) : book.authors}</div>
         </div>
       </li>
     )
