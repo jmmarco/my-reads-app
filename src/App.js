@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import * as BooksAPI from './utils/BooksAPI'
 import BookShelf from './BookShelf'
 import Search from './Search'
-import './App.css'
 import PropTypes from 'prop-types'
+import './App.css'
 
 class App extends Component {
 
