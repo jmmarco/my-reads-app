@@ -13,13 +13,11 @@ class App extends Component {
     super(props);
     this.state = {
       books: [],
-      showSearchPage: false,
       query: '',
       maxResults: 10,
       searchResults: []
     }
     this.updateBook = this.updateBook.bind(this)
-    // this.closeSearch = this.closeSearch.bind(this)
     this.updateQuery = this.updateQuery.bind(this)
   }
 
@@ -62,14 +60,11 @@ class App extends Component {
 
   }
 
-  // closeSearch = (e) => {
-  //   console.log('fired!')
-  //   this.setState({ showSearchPage: false })
-  // }
-
   updateQuery = (query) => {
+    // Set state and trim whitespace
     this.setState({ query: query.trim() })
 
+    // Call the search API
     BooksAPI.search(this.state.query, this.state.maxResults)
     .then((books) => {
       if (typeof books === 'undefined' || books.error) return
@@ -117,10 +112,11 @@ class App extends Component {
                   updateBook={this.updateBook}
                 />
               </div>
+
             </div>
 
             <div className="open-search">
-              <Link  to="/search" >Add a book</Link>
+              <Link  to="/search">Add a book</Link>
             </div>
           </div>
             )}/>
