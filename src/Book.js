@@ -3,12 +3,10 @@ import React, { Component } from 'react'
 class Book extends Component {
 
   updateBook = (book, newShelf) => {
-    console.log('fired updateBook')
     this.props.updateBook(book, newShelf)
   }
 
   render() {
-    console.log(this.props)
     const {book, updateBook} = this.props
     return (
       <li key={book.id}>
