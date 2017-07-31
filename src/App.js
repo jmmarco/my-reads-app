@@ -128,7 +128,12 @@ class App extends Component {
 
 // Moving propTypes outside per: https://facebook.github.io/react/docs/typechecking-with-proptypes.html
 App.propTypes = {
-  books: PropTypes.array
+  books: PropTypes.array,
+  query: PropTypes.string,
+  maxResults: PropTypes.number,
+  searchResults: PropTypes.array,
+  updateBook: PropTypes.func,
+  updateQuery: PropTypes.func
 }
 
 export default App;
