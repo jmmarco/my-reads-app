@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import BookShelf from './BookShelf'
 
 
@@ -8,9 +9,9 @@ class Search extends Component {
     this.props.updateQuery(query)
   }
 
-  closeSearch(e) {
-    this.props.closeSearch()
-  }
+  // closeSearch(e) {
+  //   this.props.closeSearch()
+  // }
 
   render() {
     const {updateQuery} = this.props
@@ -18,7 +19,7 @@ class Search extends Component {
     return(
       <div className="search-books">
         <div className="search-books-bar">
-          <a className="close-search" onClick={(e) => this.closeSearch(e)}>Close</a>
+          <Link to="/" className="close-search">Close</Link>
           <div className="search-books-input-wrapper">
             {/*
               NOTES: The search from BooksAPI is limited to a particular set of search terms.
