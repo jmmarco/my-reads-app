@@ -9,13 +9,7 @@ class Search extends Component {
     this.props.updateQuery(query)
   }
 
-  // closeSearch(e) {
-  //   this.props.closeSearch()
-  // }
-
   render() {
-    const {updateQuery} = this.props
-    console.log(this.props)
     return(
       <div className="search-books">
         <div className="search-books-bar">
@@ -29,7 +23,8 @@ class Search extends Component {
               However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
               you don't find a specific author or title. Every search is limited by search terms.
             */}
-            <input type="text"
+            <input
+              type="text"
               placeholder="Search by title or author"
               value={this.props.query}
               onChange={(event) => this.searchStuff(event.target.value)}
@@ -37,7 +32,10 @@ class Search extends Component {
           </div>
         </div>
         <div className="search-books-results">
-          <BookShelf books={this.props.books} updateBook={this.props.updateBook}/>
+          <BookShelf
+            books={this.props.books}
+            updateBook={this.props.updateBook}
+          />
         </div>
       </div>
     )

@@ -4,7 +4,7 @@ import Book from './Book'
 class BookShelf extends Component {
 
   render() {
-    const {books, updateBook} = this.props
+    const {books} = this.props
 
     // This is much cleaner approach
     const mappedBooks = books.map((book, i) => {
