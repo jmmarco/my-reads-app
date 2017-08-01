@@ -65,14 +65,17 @@ class App extends Component {
     this.setState({ query: query.trim() })
 
     // Call the search API
-    BooksAPI.search(this.state.query, this.state.maxResults)
-    .then((books) => {
-      if (typeof books === 'undefined' || books.error) return
-      this.setState({
-        searchResults: books
+    if (query !== '') {
+      BooksAPI.search(this.state.query, this.state.maxResults)
+      .then((books) => {
+        if (typeof books === 'undefined' || books.error) return
+        this.setState({
+          searchResults: books
+        })
       })
-    })
-    .catch(err => console.log('There was an API error', err))
+      .catch(err => console.log('There was an API error', err))
+    }
+
   }
 
   render() {
