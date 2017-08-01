@@ -1,11 +1,12 @@
-@import url('https://fonts.googleapis.com/css?family=Poppins');
+@import url('https://fonts.googleapis.com/css?family=Roboto');
 
 html, body, .root {
   height: 100%;
 }
 body {
   line-height: 1.5;
-  font-family: "Poppins", sans-serif;
+  font-family: 'Roboto', sans-serif !important;
+
 }
 body, .app {
   background: white;
@@ -63,6 +64,14 @@ body, .app {
   background-size: 28px;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   font-size: 0;
+}
+
+.open-search a:hover {
+  background: #039BE5;
+  background-image: url('./icons/add.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 28px;
 }
 
 /* search page */
@@ -164,6 +173,13 @@ body, .app {
   cursor: pointer;
 }
 
+.book-shelf-changer:hover {
+  background: #039BE5;
+  background-image: url('./icons/arrow-drop-down.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 20px;
+}
 /* book cover */
 
 .book-cover {
