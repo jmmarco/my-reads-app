@@ -31,32 +31,46 @@ class App extends Component {
     BooksAPI.update(book, newShelf).then((response) => {
 
       //  Map the books array
-      let books = this.state.books.map((b) => {
-        if(book.id === b.id ) {
+      const books = this.state.books.map((b) => {
+        if(b.id === book.id) {
           b.shelf = newShelf
         }
         return b
       })
+
+      this.setState({books: books})
+
 
       // Map the Search results books array
-      let searchedBooks = this.state.searchResults.map((b) => {
-        if (book.id === b.id) {
+      const searchedBooks = this.state.searchResults.map((b) => {
+        if (b.id === book.id) {
           b.shelf = newShelf
         }
         return b
       })
 
-      // Concat both arrays
-      let results = books.concat(searchedBooks)
 
-      // Filter out duplicates
-      results = results.filter((b, pos, self) => {
-        return self.indexOf(b) === pos
+      this.setState({searchResults: searchedBooks})
+
+
+
+      const singleBook = searchedBooks.filter((b) => {
+        return b.id === book.id
       })
 
-      // Set the state
-      this.setState({books: results})
+      const bothArrays = books.concat(singleBook)
+
+      const uniqueArray = bothArrays.filter(function(item, pos) {
+        return bothArrays.indexOf(item) === pos;
+      })
+
+      this.setState({books: uniqueArray})
+
     })
+
+    // This `updateBook` function can be improved. For example: I don't
+    // think I need to set the state so frequently.
+
 
   }
 
