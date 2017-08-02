@@ -96,14 +96,14 @@ class App extends Component {
     return (
       <div className="app">
         <Route path="/search" exact
-          component={
+          render={() => (
             <Search
               books={this.state.searchResults}
               query={this.state.query}
               updateBook={this.updateBook} updateQuery={this.updateQuery}
               closeSearch={this.closeSearch}
             />
-          }
+          )}
         />
 
         <Route path="/" exact render={() => (
@@ -155,4 +155,4 @@ App.propTypes = {
   updateQuery: PropTypes.func
 }
 
-export default App;
+export default App
