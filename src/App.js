@@ -95,14 +95,16 @@ class App extends Component {
   render() {
     return (
       <div className="app">
-        <Route path="/search" exact render={() => (
-          <Search
-            books={this.state.searchResults}
-            query={this.state.query}
-            updateBook={this.updateBook} updateQuery={this.updateQuery}
-            closeSearch={this.closeSearch}
-          />
-        )}/>
+        <Route path="/search" exact
+          component={
+            <Search
+              books={this.state.searchResults}
+              query={this.state.query}
+              updateBook={this.updateBook} updateQuery={this.updateQuery}
+              closeSearch={this.closeSearch}
+            />
+          }
+        />
 
         <Route path="/" exact render={() => (
           <div>
