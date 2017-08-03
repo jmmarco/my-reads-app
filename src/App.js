@@ -10,7 +10,7 @@ import './App.css'
 class App extends Component {
 
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       books: [],
       query: '',
@@ -27,52 +27,36 @@ class App extends Component {
     })
   }
 
-  updateBook = (book, newShelf) => {
-    BooksAPI.update(book, newShelf).then((response) => {
+  updateBook = (book, shelf) => {
 
-      //  Map the books array
+    console.log(book, shelf)
+    // console.log("The current state of books is: ", this.state.books)
+    // console.log("The current state of searchResults is: ", this.state.searchResults)
+    BooksAPI.update(book, shelf).then(response => {
+      // response is just an object with shelves that contain book id's
       const books = this.state.books.map((b) => {
-        if(b.id === book.id) {
-          b.shelf = newShelf
-        }
-        return b
-      })
-
-      this.setState({books: books})
-
-
-      // Map the Search results books array
-      const searchedBooks = this.state.searchResults.map((b) => {
         if (b.id === book.id) {
-          b.shelf = newShelf
+          b.shelf = shelf
         }
         return b
       })
 
-
-      this.setState({searchResults: searchedBooks})
-
-
-
-      const singleBook = searchedBooks.filter((b) => {
-        return b.id === book.id
+      const searchResults = this.state.searchResults.map((b) => {
+        if (b.id === book.id) {
+          b.shelf = shelf
+        }
+        return b
       })
 
-      const bothArrays = books.concat(singleBook)
+      this.setState(state => ({ searchResults: state.searchResults.filter(b => b.id !== book.id).concat([book]) }))
 
-      const uniqueArray = bothArrays.filter(function(item, pos) {
-        return bothArrays.indexOf(item) === pos;
-      })
 
-      this.setState({books: uniqueArray})
+      this.setState(state => ({ books: state.books.filter(b => b.id !== book.id).concat([ book ]) }))
 
     })
 
-    // This `updateBook` function can be improved. For example: I don't
-    // think I need to set the state so frequently.
+  } // End of updateBook
 
-
-  }
 
   updateQuery = (query) => {
     // Set state and trim whitespace
