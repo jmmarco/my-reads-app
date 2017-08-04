@@ -57,19 +57,39 @@ class App extends Component {
     // Call the search API
     if (query !== '') {
       BooksAPI.search(this.state.query, this.state.maxResults)
-      .then((books) => {
-        if (typeof books === 'undefined' || books.error) return
+      .then((response) => {
+
+
+        // Catch API response errors
+        if (typeof response === 'undefined' || response.error) return
+
+
+        // Set all the books from the search to have default shelf of 'none'
+        response.map(b => {
+          b.shelf = 'none'
+        })
+
+        console.log(response)
+
+        // Check the books in the main page and set the shelf 
+        for (let book of this.state.books) {
+          response.map(b => {
+            if (book.id === b.id) {
+              b.shelf = book.shelf
+            }
+          })
+        }
+
+
+
         this.setState({
-          searchResults: books
+          searchResults: response
         })
       })
       .catch(err => console.log('There was an API error', err))
     }
 
   }
-
-
-
 
   render() {
     return (
@@ -78,6 +98,7 @@ class App extends Component {
           render={() => (
             <Search
               books={this.state.searchResults}
+              potato={this.state.books}
               query={this.state.query}
               updateBook={this.updateBook} updateQuery={this.updateQuery}
               closeSearch={this.closeSearch}
