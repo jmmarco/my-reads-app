@@ -29,18 +29,6 @@ class App extends Component {
 
   updateBook = (book, newShelf) => {
     BooksAPI.update(book, newShelf).then((response) => {
-
-      //  Map the books array
-      const books = this.state.books.map((b) => {
-        if(b.id === book.id) {
-          b.shelf = newShelf
-        }
-        return b
-      })
-
-      this.setState({books: books})
-
-
       // Map the Search results books array
       const searchedBooks = this.state.searchResults.map((b) => {
         if (b.id === book.id) {
@@ -48,30 +36,18 @@ class App extends Component {
         }
         return b
       })
+      // Set the state so that the search results update accordingly
+      this.setState({ searchResults: searchedBooks })
+    }).catch(err => console.log("Something went wrong ", err))
 
-
-      this.setState({searchResults: searchedBooks})
-
-
-
-      const singleBook = searchedBooks.filter((b) => {
-        return b.id === book.id
-      })
-
-      const bothArrays = books.concat(singleBook)
-
-      const uniqueArray = bothArrays.filter(function(item, pos) {
-        return bothArrays.indexOf(item) === pos;
-      })
-
-      this.setState({books: uniqueArray})
-
-    })
-
-    // This `updateBook` function can be improved. For example: I don't
-    // think I need to set the state so frequently.
-
-
+    if (book.shelf !== newShelf) {
+      book.shelf = newShelf
+      BooksAPI.update(book, newShelf).then((res) => {
+        // Set the state to include the updated book
+        this.setState(state => ({
+          books: state.books.filter(b => b.id !== book.id).concat([ book ]) }))
+      }).catch(err => console.log("Something went wrong ", err))
+    }
   }
 
   updateQuery = (query) => {
@@ -91,6 +67,9 @@ class App extends Component {
     }
 
   }
+
+
+
 
   render() {
     return (
