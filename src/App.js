@@ -64,18 +64,20 @@ class App extends Component {
         if (typeof response === 'undefined' || response.error) return
 
         // Set all the books from the search to have default shelf of 'none'
-        response.map(b => {
-          return b.shelf = 'none'
-        })
 
         // Check the books in the main page and set the shelf
         for (let book of this.state.books) {
-          response.map(b => {
-            if (book.id === b.id) {
-              b.shelf = book.shelf
-            }
+        	response = response.map(b => {
+        		if (book.id === b.id) {
+        			b.shelf = book.shelf
+              console.log("The matching book is: ", book.title, " and the shelf is: ", book.shelf)
+              console.log("The books from the search is: ", b.title, " and the shelf is: ", b.shelf)
+        		} else {
+              console.log(b.shelf)
+        			// b.shelf = 'none'
+        		}
             return b
-          })
+        	})
         }
 
         // Finally set the state on the search results
